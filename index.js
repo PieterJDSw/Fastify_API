@@ -21,13 +21,8 @@ app.get("/api/users", async (request, reply) => {
 })
 app.get("/api/users/:userId", async (request, reply) => {
     var userId = request.params.userId
-    User.findById(userId, (err, user) => {
-        if (!err) {
-            reply.send(user)
-        } else {
-            reply.send({ error: err })
-        }
-    })
+
+    const user = await User.findById(userId)
 })
 app.post("/api/users", async (request, reply) => {
     console.log(request.body)
