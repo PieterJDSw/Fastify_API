@@ -29,26 +29,7 @@ app.post("/api/users", async (request, reply) => {
     var user = request.body
     User.create(user)
 })
-app.put("/api/users/:userId", async (request, reply) => {
-    var userId = request.params.userId
-    var newUserEdit = request.body
-    User.findById(userId, (err, user) => {
-        if (!err) {
-            user.age = newUserEdit.age
-            user.name = newUserEdit.name
-            user.email = newUserEdit.email
-            user.save((er, savedUser) => {
-                if (!er) {
-                    reply.send(savedUser)
-                } else {
-                    reply.send(er)
-                }
-            })
-        } else {
-            reply.send({ error: err })
-        }
-    })
-})
+
 // Start the server
 app.listen(3000, function (err, address) {
     if (err) {
